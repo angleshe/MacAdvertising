@@ -3,6 +3,7 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 export default (env: 'production' | 'development'): Configuration => {
   const isPro: boolean = env === 'production';
@@ -16,12 +17,9 @@ export default (env: 'production' | 'development'): Configuration => {
       filename: '[name].[hash].js',
       publicPath: isPro ? './' : '/'
     },
+    cache: true,
     module: {
       rules: [
-        {
-          test: /\.html$/,
-          loader: 'html-loader'
-        },
         {
           test: /\.ts$/,
           use: ['babel-loader', 'ts-loader', 'eslint-loader'],
@@ -29,7 +27,12 @@ export default (env: 'production' | 'development'): Configuration => {
         },
         {
           test: /\.scss$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+          use: [
+            isPro ? MiniCssExtractPlugin.loader : 'style-loader',
+            'css-loader',
+            'postcss-loader',
+            'sass-loader'
+          ]
         },
         {
           test: /\.jpg$/,
@@ -48,7 +51,15 @@ export default (env: 'production' | 'development'): Configuration => {
         configFile: path.resolve(__dirname, './.stylelintrc.js'),
         files: '**/*.scss'
       }),
-      new MiniCssExtractPlugin()
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.resolve(__dirname, './src/image'),
+            to: path.resolve(__dirname, './dist/image')
+          }
+        ]
+      }),
+      ...(isPro ? [new MiniCssExtractPlugin()] : [])
     ],
     resolve: {
       extensions: ['.ts', '.js', '.json']
