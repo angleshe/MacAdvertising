@@ -12,8 +12,6 @@ const pcBgDom = document.querySelector<HTMLDivElement>('.scale-image .pc-bg');
 let scaleCanvasDomTop: number = 0;
 let image1: HTMLImageElement | undefined;
 let image2: HTMLImageElement | undefined;
-// image1.src = './image/mac1.jpg';
-// image2.src = './image/mac2.jpg';
 
 function createdImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
@@ -95,35 +93,6 @@ function scaleScrollHandler(scrollTop: number): void {
   }
 }
 
-// async function test(): Promise<void> {
-//   console.log('asd');
-//   const [img1, img2] = await Promise.all([
-//     createdImage('./image/mac1.jpg'),
-//     createdImage('./image/mac2.jpg')
-//   ]);
-//   console.log('bb');
-//   const testCanvas = document.querySelector<HTMLCanvasElement>('.test');
-//   console.log(testCanvas);
-//   if (testCanvas) {
-//     testCanvas.width = CANVAS_WIDTH;
-//     testCanvas.height = CANVAS_HEIGHT;
-//     const ctx = testCanvas.getContext('2d');
-//     ctx?.drawImage(img1, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-//     // ctx?.drawImage(
-//     //   img2,
-//     //   0,
-//     //   CANVAS_HEIGHT - 100,
-//     //   CANVAS_WIDTH,
-//     //   100,
-//     //   0,
-//     //   CANVAS_HEIGHT - 100,
-//     //   CANVAS_WIDTH,
-//     //   CANVAS_HEIGHT
-//     // );
-//     ctx?.drawImage(img2, 0, img2.height - 300, img2.width, 300, 0, 0, CANVAS_WIDTH, 300);
-//   }
-// }
-
 async function init(): Promise<void> {
   [image1, image2] = await Promise.all([
     createdImage('./image/mac1.jpg'),
@@ -150,5 +119,3 @@ document.addEventListener<'scroll'>('scroll', () => {
 });
 
 init();
-console.log('test');
-// test();
