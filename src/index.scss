@@ -1,3 +1,8 @@
+body {
+  width: calc(100vw - 15px);
+  overflow-x: hidden;
+}
+
 .pc-container {
   position: relative;
   width: 100%;
@@ -31,12 +36,39 @@
     position: sticky;
     top: 100px;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 100px);
 
     .pc-img {
       width: 100vh;
       height: 521px;
       margin: 0 auto;
+    }
+  }
+}
+
+.scale-image {
+  width: calc(100vw - 15px);
+  height: 500vh;
+  margin-top: 30px;
+  // overflow-x: hidden;
+
+  .pc-bg {
+    position: sticky;
+    top: -70px;
+    width: calc(100vw - 15px);
+    height: 100vh;
+
+    &.show-image {
+      background: url(./image/mac3.jpg) no-repeat center center;
+      background-size: 90% 90%;
+    }
+
+    .canvas {
+      position: absolute;
+      top: 90px;
+      left: 240px;
+      display: block;
+      margin: 0;
     }
   }
 }

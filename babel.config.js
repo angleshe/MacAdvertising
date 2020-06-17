@@ -1,5 +1,12 @@
 module.exports = {
-  presets: ['@babel/preset-env'],
+  presets: [
+    [
+      '@babel/env',
+      {
+        modules: false
+      }
+    ]
+  ],
 
   plugins: [
     '@babel/plugin-proposal-optional-chaining',
